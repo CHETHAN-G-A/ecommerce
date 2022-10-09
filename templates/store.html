@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load cart %}
+<div class="row">
+    <div class="col-md-2">
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+              <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                  <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true"><b>Category</b></a>
+                  <a href="/head_phones" class="list-group-item list-group-item-action py-2 ripple">Head phones</a>
+                  <a href="/ear_buds" class="list-group-item list-group-item-action py-2 ripple">Ear Buds</a>
+                  <a href="/ear_phones" class="list-group-item list-group-item-action py-2 ripple">Ear Phones</a>
+                </div>
+              </div>
+            </nav>
+    </div>
+   <div class="container mt-3 col-md-10">
+        <div class="row mx-auto">
+        {% for product in products %}
+        <div class="card mx-auto mb-3" style="width: 18rem;">
+            <img src={{product.image.url}} class="card-img-top" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-title">{{product.name}}</p>
+                <p class="card-text">{{product.price|currency_symbol}}</p>
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    <input hidden name=product value="{{product.id}}">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <select name="qty">
+                                <option value="1">1</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div >
+                    <div class="pt-1">
+                    <button type="submit" class="btn btn-light border btn-sm">Add to cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load cart %}
+<div class="p-5 m-5">
+<h1>Your Orders</h1>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">Product</th>
+      <th scope="col">Date</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for product in products %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td><img style="height:80px;
+                                  width:80px;" class="rounded-circle" src="{{product.product.image.url}}"></td>
+                  <td>{{product.product.name}}</td>
+                  <td>{{product.date}}</td>
+                  <td>{{product.price|currency_symbol}}</td>
+                  <td>{{product.quantity}}</td>
+                  <td>{{product.price|multiply:product.quantity|currency_symbol}}</td>
+                  {% if product.status %}
+                    <td>completed</td>
+                  {% else %}
+                    <td>pending</td>
+                  {% endif %}
+                </tr>
+        {% endfor %}
+  </tbody>
+
+  </tfoot>
+</table>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-3">
+<div class="col-lg-4 mx-auto">
+<h1>Login</h1>
+<form action="/login" method="post">
+  {% if error_message %}
+  <div class="alert alert-danger">
+    {{error_message}}
+  </div>
+  {% endif %}
+  {% csrf_token %}
+    <div class="mb-3">
+    <label class="form-label">E-mail</label>
+    <input type="email" name="e_mail" class="form-control form-control-sm">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" name="password" class="form-control form-control-sm">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+{% endblock content %}
